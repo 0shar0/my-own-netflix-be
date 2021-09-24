@@ -5,11 +5,11 @@ const cors = require('cors');
 const model = require('./models/models');
 
 const app = express();
-app.use(cors);
-app.use(express.json);
+app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'message' });
+  res.json({ message: 'message' });
 });
 
 const start = async () => {
