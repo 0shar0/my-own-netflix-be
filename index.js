@@ -22,7 +22,7 @@ const start = async () => {
 */
 
 app.get('/', (r) => {
-  r.end(<div>response</div>);
+  r.end(`<div>response</div>`);
 });
 
 app.listen(port, () => console.log('server start'));
