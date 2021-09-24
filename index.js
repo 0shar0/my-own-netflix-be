@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const sequelize = require('./db');
 const client = require('./pg');
-const port = process.env.PORT ;
+const port = process.env.PORT;
 
 const app = express();
 
@@ -17,4 +17,8 @@ const start = async () => {
   }
 };
 
-start();
+/*start();*/
+
+app.get('/', (r) => {
+  r.end(<div>response</div>);
+});
