@@ -1,28 +1,17 @@
 require('dotenv').config();
 const express = require('express');
 const sequelize = require('./db');
-const client = require('./pg');
-const port = process.env.PORT;
 
 const app = express();
 
-/*
 const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-    /!*await client.connect();*!/
-
+    app.listen(process.env.PORT, () => console.log('server start'));
   } catch (e) {
     console.log(e);
   }
 };
 
-/!*start();*!/
-*/
-
-app.get('/', (r,re) => {
-  re.end(`<div>response</div>`);
-});
-
-app.listen(port, () => console.log('server start'));
+start();
