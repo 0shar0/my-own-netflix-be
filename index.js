@@ -1,17 +1,27 @@
 require('dotenv').config();
 const express = require('express');
 const sequelize = require('./db');
+const cors = require('cors');
+const model = require('./models/models');
 
 const app = express();
+app.use(cors);
+app.use(express.json);
 
-const start = async () => {
+app.get('/', (req, res) => {
+  console.log(req);
+  res.status(200).json({ message: 'message' });
+});
+
+/*const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-    app.listen(process.env.PORT, () => console.log('server start'));
   } catch (e) {
     console.log(e);
   }
 };
 
-start();
+start();*/
+
+app.listen(5000, () => console.log('server start'));
