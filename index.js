@@ -6,19 +6,23 @@ const port = process.env.PORT;
 
 const app = express();
 
+/*
 const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
-    /*await client.connect();*/
-    app.listen(port, () => console.log('server start'));
+    /!*await client.connect();*!/
+
   } catch (e) {
     console.log(e);
   }
 };
 
-/*start();*/
+/!*start();*!/
+*/
 
 app.get('/', (r) => {
   r.end(<div>response</div>);
 });
+
+app.listen(port, () => console.log('server start'));
