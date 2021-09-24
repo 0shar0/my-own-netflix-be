@@ -21,8 +21,8 @@ const start = async () => {
 /!*start();*!/
 */
 
-app.get('/', (r) => {
-  r.end(`<div>response</div>`);
+app.get('/', (r,re) => {
+  re.end(`<div>response</div>`);
 });
 
 app.listen(port, () => console.log('server start'));
