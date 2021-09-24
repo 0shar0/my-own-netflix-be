@@ -9,11 +9,10 @@ app.use(cors);
 app.use(express.json);
 
 app.get('/', (req, res) => {
-  console.log(req);
   res.status(200).json({ message: 'message' });
 });
 
-/*const start = async () => {
+const start = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync();
@@ -22,6 +21,6 @@ app.get('/', (req, res) => {
   }
 };
 
-start();*/
-
-app.listen(5000, () => console.log('server start'));
+start().then(() =>
+  app.listen(process.env.PORT, () => console.log('server start')),
+);
