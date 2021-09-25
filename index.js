@@ -3,14 +3,14 @@ const express = require('express');
 const sequelize = require('./db');
 const cors = require('cors');
 const model = require('./models/models');
+const router = require('./routs/index');
+const errorHandler = require('./middlewear/ErrorHandlingMidldewear');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.json({ message: 'message' });
-});
+app.use('/api', router);
+app.use(errorHandler);
 
 const start = async () => {
   try {
