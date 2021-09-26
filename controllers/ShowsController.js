@@ -40,7 +40,10 @@ class ShowsControllers {
   async allShows(req, res) {
     let { status, genres, limit, page: page } = req.query;
     page = page || 1;
-    limit = limit || 12;
+    limit = limit || 20;
+    if (genres) {
+      genres = JSON.parse(genres);
+    }
     const offset = limit * page - limit;
     let shows;
     if (!status && !genres) {
@@ -55,12 +58,14 @@ class ShowsControllers {
     }
     if (!status && genres) {
       shows = await Shows.findAndCountAll({
-        where: { genres: { [Op.contains]: [...genres] }, limit, offset },
+        where: { genres: { [Op.contains]: genres } },
+        limit,
+        offset,
       });
     }
     if (status && genres) {
       shows = await Shows.findAndCountAll({
-        where: { genres: { [Op.contains]: [...genres] }, status },
+        where: { genres: { [Op.contains]: genres }, status },
         limit,
         offset,
       });
