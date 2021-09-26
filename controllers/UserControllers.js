@@ -11,7 +11,7 @@ const getJWT = (id, email, role) => {
 
 class UserControllers {
   async register(req, res, next) {
-    const { email, password, role } = req.body;
+    const { email, password, role } = req.query;
     if (!email || !password) {
       return next(ApiError.badRequest('No E-mail or Password'));
     }
@@ -27,7 +27,7 @@ class UserControllers {
   }
 
   async login(req, res, next) {
-    const { email, password } = req.body;
+    const { email, password } = req.query;
     const user = await User.findOne({ where: { email } });
     if (!user) {
       return next(ApiError.internal('User not Found'));
