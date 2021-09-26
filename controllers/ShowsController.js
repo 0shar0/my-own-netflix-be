@@ -20,13 +20,15 @@ const fetchShows = (page) => {
 };
 
 class ShowsControllers {
-
   async createShow(req, res) {
     let count = 0;
-    do {
+    const interval = setInterval(() => {
       fetchShows(count);
       count++;
-    } while (count <= 231);
+      if (count >= 231) {
+        clearInterval(interval);
+      }
+    }, 5_000);
   }
 
   async currentShow(req, res) {
