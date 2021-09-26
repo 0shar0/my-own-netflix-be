@@ -1,11 +1,28 @@
-class PeopleControllers {
-  async createPerson(req, res) {}
+const fetch = require('node-fetch');
+const { People } = require('../models/models');
 
-  async currentPerson(req, res) {
-    const { id } = req.query;
+class PeopleControllers {
+  async createPerson(req, res) {
+    fetch('https://api.tvmaze.com/people')
+      .then((r) => r.json())
+      .then((r) =>
+        r.forEach((el) => {
+          const { id } = el;
+          People.create({ id, data: el });
+        }),
+      );
   }
 
-  async allPeople(req, res) {}
+  async currentPerson(req, res) {
+    const { id } = req.body;
+    const person = await People.findOne({ where: { id } });
+    return res.json(person);
+  }
+
+  async allPeople(req, res) {
+    const people = await People.findAll();
+    return res.json(people);
+  }
 }
 
 module.exports = new PeopleControllers();
