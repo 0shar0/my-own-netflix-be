@@ -15,9 +15,5 @@ const Shows = sequelize.define('shows', {
   data: { type: DataTypes.JSON },
 });
 
-const People = sequelize.define('people', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: false },
-  data: { type: DataTypes.JSON },
-});
 
-module.exports = { User, Shows, People };
+module.exports = { User, Shows };
