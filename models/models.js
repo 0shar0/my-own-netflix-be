@@ -6,6 +6,8 @@ const User = sequelize.define('user', {
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING },
   role: { type: DataTypes.STRING, defaultValue: 'USER' },
+  likedShows: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true },
+  friend: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true },
 });
 
 const Shows = sequelize.define('shows', {
@@ -14,6 +16,5 @@ const Shows = sequelize.define('shows', {
   genres: { type: DataTypes.ARRAY(DataTypes.STRING) },
   data: { type: DataTypes.JSON },
 });
-
 
 module.exports = { User, Shows };
