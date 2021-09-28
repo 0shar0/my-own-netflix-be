@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/models');
 
-const getJWT = (id, email, role) => {
-  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
+const getJWT = (id, email, role, likedShows) => {
+  return jwt.sign({ id, email, role, likedShows }, process.env.SECRET_KEY, {
     expiresIn: '24h',
   });
 };
@@ -21,7 +21,7 @@ class UserControllers {
     }
     const hashPassword = await bcrypt.hash(password, 5);
     const user = await User.create({ email, role, password: hashPassword });
-    const token = getJWT(user.id, user.email, user.role);
+    const token = getJWT(user.id, user.email, user.role, user.likedShows);
 
     return res.json({ token });
   }
@@ -36,15 +36,24 @@ class UserControllers {
     if (!comparePassword) {
       return next(ApiError.forbidden('Incorrect Password'));
     }
-    const token = getJWT(user.id, user.email, user.role);
+    const token = getJWT(user.id, user.email, user.role, user.likedShows);
     return res.json({ token });
   }
 
-  async check(req, res, next) {
+  async check(req, res) {
     const {
-      user: { id, email, role },
+      user: { id, email, role, likedShows },
     } = req;
-    return res.json({ token: getJWT(id, email, role) });
+    return res.json({ token: getJWT(id, email, role, likedShows) });
+  }
+
+  async update(req, res) {
+    const { id, email, role, likedShows } = req.body;
+    await User.update({ id, email, role, likedShows }, { where: { id } });
+    const user = await User.findOne({ where: { id } });
+    return res.json({
+      token: getJWT(user.id, user.email, user.role, user.likedShows),
+    });
   }
 }
 
