@@ -5,9 +5,10 @@ const User = sequelize.define('user', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   email: { type: DataTypes.STRING, unique: true },
   password: { type: DataTypes.STRING },
+  name: { type: DataTypes.STRING, allowNull: true },
   role: { type: DataTypes.STRING, defaultValue: 'USER' },
   likedShows: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true },
-  friend: { type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: true },
+  friend: { type: DataTypes.ARRAY(DataTypes.JSON), allowNull: true },
 });
 
 const Shows = sequelize.define('shows', {
