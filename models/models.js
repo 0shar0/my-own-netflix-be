@@ -18,4 +18,9 @@ const Shows = sequelize.define('shows', {
   data: { type: DataTypes.JSON },
 });
 
-module.exports = { User, Shows };
+const Request = sequelize.define('request', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  to: { type: DataTypes.INTEGER },
+  from: { type: DataTypes.INTEGER },
+});
+module.exports = { User, Shows, Request };
