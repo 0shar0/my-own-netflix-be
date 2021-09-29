@@ -8,7 +8,7 @@ const User = sequelize.define('user', {
   name: { type: DataTypes.STRING, allowNull: true },
   role: { type: DataTypes.STRING, defaultValue: 'USER' },
   likedShows: { type: DataTypes.ARRAY(DataTypes.INTEGER), defaultValue: [] },
-  friend: { type: DataTypes.ARRAY(DataTypes.JSON), allowNull: true },
+  friends: { type: DataTypes.ARRAY(DataTypes.INTEGER), defaultValue: [] },
 });
 
 const Shows = sequelize.define('shows', {
