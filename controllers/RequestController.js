@@ -26,8 +26,18 @@ class RequestController {
         .map(async (id) => {
           return await User.findOne({ where: { id } });
         }),
-    ).then((users) => res.json(users));
+    )
+      .then((users) =>
+        users.map((user) => {
+          const { dataValues } = user;
+          return { ...dataValues, password: null };
+        }),
+      )
+      .then((users) => {
+        res.json(users);
+      });
   }
+
   async acceptRequest(req, res) {
     const currentUser = req.user;
     const user = await User.findOne({ where: { id: req.body.id } });
