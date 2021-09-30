@@ -8,7 +8,7 @@ const errorHandler = require('./middlewear/ErrorHandlingMidldewear');
 
 const app = express();
 
-app.use(cors({ origin: 'https://my-own-netflix-shar.herokuapp.com/' }));
+app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use('/api', router);
 app.use(errorHandler);
