@@ -50,7 +50,9 @@ class RequestController {
       { friends: [...currentUser?.friends, user.id] },
       { where: { id: currentUser.id } },
     );
-    await Request.destroy({ where: { from: user.id, to: currentUser.id } });
+    await Request.destroy({
+      where: { from: user.id, to: currentUser.id },
+    });
     const token = getJWT(
       currentUser.id,
       currentUser.email,
