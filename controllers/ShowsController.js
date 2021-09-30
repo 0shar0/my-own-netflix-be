@@ -28,7 +28,7 @@ class ShowsControllers {
       if (count >= 231) {
         clearInterval(interval);
       }
-    }, 5_000);
+    }, 10_000);
   }
 
   async currentShow(req, res) {
